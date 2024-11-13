@@ -3,7 +3,7 @@
  <head> 
   <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Qr Generator</title> 
+  <title>QR Code Generator</title> 
   <style>
     * {
       margin: 0;
@@ -26,6 +26,9 @@
       text-align: center;
       max-width: 400px;
       width: 100%;
+    }
+    .container h2 {
+      margin-bottom: 20px;
     }
     .container img {
       width: 150px;
@@ -52,32 +55,75 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin-top: 10px;
     }
     .container button:hover {
       background-color: #0056b3;
+    }
+    .download-btn {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      color: #fff;
+      background-color: #28a745;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .download-btn:hover{
+      background-color: #228d3b;
+    }
+    .reload-btn {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      color: #fff;
+      background-color: #dc3545;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
  </head> 
  <body> 
   <div class="container"> 
     <h2>QR Code Generator</h2>
-    <img src="" alt="QR Code">
-    <input type="text" placeholder="Enter text or URL"> 
-    <button>Generate</button> 
+    <img src="" alt="QR Code" id="qr-image"> 
+    <input type="text" placeholder="Enter text or URL" id="qr-input"> 
+    <button id="generate-btn">Generate</button> 
+    <a id="download-btn" class="download-btn" download="qr-code.png">Download QR Code</a>
+    <button id="reload-btn" class="reload-btn">New Code Generate</button>
   </div> 
   <script>
-    const image = document.querySelector("img"),
-          input = document.querySelector("input"),
-          button = document.querySelector("button"),
+    const image = document.querySelector("#qr-image"),
+          input = document.querySelector("#qr-input"),
+          generateBtn = document.querySelector("#generate-btn"),
+          downloadBtn = document.querySelector("#download-btn"),
+          reloadBtn = document.querySelector("#reload-btn"),
           api = `https://api.qrserver.com/v1/`,
           api2 = `create-qr-code/?size=150x150&data=`;
 
-    button.addEventListener("click", () => {
+    generateBtn.addEventListener("click", () => {
       if(input.value.trim() !== ""){
-        image.src = `${api}${api2}${encodeURIComponent(input.value)}`;
+        const qrCodeUrl = `${api}${api2}${encodeURIComponent(input.value)}`;
+        image.src = qrCodeUrl;
+        downloadBtn.style.display = "inline-block"; // Show the download button
+        reloadBtn.style.display = "inline-block";   // Show the reload button
+
+        // Fetch the image and create a download link
+        fetch(qrCodeUrl)
+          .then(response => response.blob())
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            downloadBtn.href = url;
+          })
+          .catch(() => alert("Failed to generate QR code for download"));
       } else {
         alert("Please enter text or a URL to generate a QR code.");
       }
+    });
+
+    // Add event listener to the reload button to refresh the page
+    reloadBtn.addEventListener("click", () => {
+      location.reload();
     });
   </script> 
  </body>

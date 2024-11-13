@@ -2,7 +2,7 @@
 
 A user-friendly, web-based QR code generator that allows users to create custom QR codes instantly by simply entering the desired data. This application is ideal for generating QR codes for URLs, text, contact information, or any other type of information.
 
-![QR Generator Screenshot](screenshot_link) <!-- Add a link to a screenshot of the app here -->
+![QR Generator Screenshot](https://github.com/user-attachments/assets/82ae72e6-466c-4a0f-8b3e-67f080304e2a) <!-- Add a link to a screenshot of the app here -->
 
 ## 🚀 Features
 
@@ -28,7 +28,7 @@ Simply visit the [QR Code Generator](https://sajjadhossain0.github.io/qr-generat
 
 ## 📷 Screenshot
 
-![QR Generator Screenshot](screenshot_link) <!-- Add a screenshot here -->
+![QR Generator Screenshot](https://github.com/user-attachments/assets/82ae72e6-466c-4a0f-8b3e-67f080304e2a) <!-- Add a screenshot here -->
 
 ## 💼 Author
 

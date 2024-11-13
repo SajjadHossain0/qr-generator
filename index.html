@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Qr Generator</title> 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f2f5;
+    }
+    .container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    .container img {
+      width: 150px;
+      height: 150px;
+      margin: 20px 0;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+    }
+    .container input {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      outline: none;
+    }
+    .container button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .container button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+ </head> 
+ <body> 
+  <div class="container"> 
+    <h2>QR Code Generator</h2>
+    <img src="" alt="QR Code">
+    <input type="text" placeholder="Enter text or URL"> 
+    <button>Generate</button> 
+  </div> 
+  <script>
+    const image = document.querySelector("img"),
+          input = document.querySelector("input"),
+          button = document.querySelector("button"),
+          api = `https://api.qrserver.com/v1/`,
+          api2 = `create-qr-code/?size=150x150&data=`;
+
+    button.addEventListener("click", () => {
+      if(input.value.trim() !== ""){
+        image.src = `${api}${api2}${encodeURIComponent(input.value)}`;
+      } else {
+        alert("Please enter text or a URL to generate a QR code.");
+      }
+    });
+  </script> 
+ </body>
+</html>
